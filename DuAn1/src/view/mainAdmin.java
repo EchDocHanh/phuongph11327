@@ -151,6 +151,7 @@ public class mainAdmin extends javax.swing.JFrame {
         btnExit1.setBackground(new java.awt.Color(255, 255, 255));
         btnExit1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_subtract_25px.png"))); // NOI18N
         btnExit1.setContentAreaFilled(false);
+        btnExit1.setFocusable(false);
         btnExit1.setOpaque(true);
         btnExit1.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_subtract_25px_1.png"))); // NOI18N
         btnExit1.addActionListener(new java.awt.event.ActionListener() {
@@ -162,6 +163,7 @@ public class mainAdmin extends javax.swing.JFrame {
         btnExit.setBackground(new java.awt.Color(255, 255, 255));
         btnExit.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_aspect_ratio_25px_1.png"))); // NOI18N
         btnExit.setContentAreaFilled(false);
+        btnExit.setFocusable(false);
         btnExit.setOpaque(true);
         btnExit.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_aspect_ratio_25px.png"))); // NOI18N
         btnExit.addActionListener(new java.awt.event.ActionListener() {
@@ -173,6 +175,7 @@ public class mainAdmin extends javax.swing.JFrame {
         btnExit2.setBackground(new java.awt.Color(255, 255, 255));
         btnExit2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_close_window_25px.png"))); // NOI18N
         btnExit2.setContentAreaFilled(false);
+        btnExit2.setFocusable(false);
         btnExit2.setOpaque(true);
         btnExit2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_close_window_25px_3.png"))); // NOI18N
         btnExit2.addActionListener(new java.awt.event.ActionListener() {
@@ -245,9 +248,7 @@ public class mainAdmin extends javax.swing.JFrame {
                 .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jDesktopPane1)
-                        .addGap(0, 0, 0)))
+                    .addComponent(jDesktopPane1))
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0))
         );
