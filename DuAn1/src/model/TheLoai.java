@@ -9,26 +9,26 @@ package model;
  *
  * @author Admin
  */
-public class Album {
-    private int MaAB;
-    private String TenAB;
+public class TheLoai {
+    private int MaTL;
+    private String TenTL;
     private String NgayTao;
     private String NguoiTao;
 
-    public int getMaAB() {
-        return MaAB;
+    public int getMaTL() {
+        return MaTL;
     }
 
-    public void setMaAB(int MaAB) {
-        this.MaAB = MaAB;
+    public void setMaTL(int MaTL) {
+        this.MaTL = MaTL;
     }
 
-    public String getTenAB() {
-        return TenAB;
+    public String getTenTL() {
+        return TenTL;
     }
 
-    public void setTenAB(String TenAB) {
-        this.TenAB = TenAB;
+    public void setTenTL(String TenTL) {
+        this.TenTL = TenTL;
     }
 
     public String getNgayTao() {
