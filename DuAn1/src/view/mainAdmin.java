@@ -22,7 +22,10 @@ public class mainAdmin extends javax.swing.JFrame {
     public mainAdmin() {
         initComponents();
     }
-
+    
+    void Chay(){
+        System.out.println("Git ngáo đá");
+    };
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -101,6 +104,11 @@ public class mainAdmin extends javax.swing.JFrame {
         jButton6.setOpaque(true);
         jButton6.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_itunes_50px_1.png"))); // NOI18N
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
 
         jButton7.setBackground(new java.awt.Color(102, 255, 204));
         jButton7.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -296,6 +304,11 @@ public class mainAdmin extends javax.swing.JFrame {
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        Chay();
+    }//GEN-LAST:event_jButton6ActionPerformed
 
     /**
      * @param args the command line arguments
