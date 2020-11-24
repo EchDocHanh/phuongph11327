@@ -5,9 +5,12 @@
  */
 package view;
 
+import DAO.userDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.event.MouseListener;
+import javax.swing.JOptionPane;
+import model.TaiKhoan;
 
 /**
  *
@@ -206,8 +209,24 @@ public class LoginFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
+     void dangNhap(){
+        userDAO dao = new userDAO();
+        TaiKhoan tk = dao.findOne("select * from USERS where TaiKhoan = ?",jTextField1.getText());
+       if(tk.getMatKhau() == null){
+           JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
+           return;
+       }
+       if(tk.getMatKhau().equalsIgnoreCase(jPasswordField1.getText())){
+            JOptionPane.showMessageDialog(null,"Đăng Nhập Thành Công");
+           if(tk.isVaiTro()){
+              new mainAdmin().setVisible(true);
+        }else{
+               JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu"); 
+           }
+    }
+    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       
+       dangNhap();
        
     }//GEN-LAST:event_jButton1ActionPerformed
 

@@ -4,10 +4,13 @@
  * and open the template in the editor.
  */
 package view;
+import DAO.userDAO;
 import java.awt.BorderLayout;
 import java.awt.Color;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import model.TaiKhoan;
 
 /**
  *
@@ -55,6 +58,11 @@ public class LoginPnl extends javax.swing.JPanel {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_login_rounded_30px_1.png"))); // NOI18N
         jButton1.setText("Đăng Nhập");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(0, 153, 153));
@@ -158,6 +166,21 @@ public class LoginPnl extends javax.swing.JPanel {
         jPanel1.validate();
         jPanel1.repaint();
     }//GEN-LAST:event_jLabel4MouseClicked
+    void dangNhap(){
+        userDAO dao = new userDAO();
+        TaiKhoan tk = dao.findOne("select * from USERS where TaiKhoan = ?",jTextField1.getText());
+        if(tk.getMatKhau().equalsIgnoreCase("")){
+            JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
+        }else if(tk.getMatKhau().equalsIgnoreCase(jPasswordField1.getText())){
+            JOptionPane.showMessageDialog(null,"Đăng Nhập Thành Công");
+           if(tk.isVaiTro()){
+              new mainAdmin().setVisible(true);
+        }
+    }
+    }
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
