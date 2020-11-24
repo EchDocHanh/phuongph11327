@@ -26,6 +26,9 @@ public class mainAdmin extends javax.swing.JFrame {
     void Chay(){
         System.out.println("Git ngáo đá");
     };
+    void Chay1(){
+        System.out.println("Git ngá");
+    };
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
