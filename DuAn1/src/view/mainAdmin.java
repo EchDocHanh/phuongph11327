@@ -7,6 +7,7 @@ package view;
 
 import java.awt.Frame;
 import java.awt.GraphicsEnvironment;
+import javax.swing.JInternalFrame;
 
 /**
  *
@@ -23,6 +24,20 @@ public class mainAdmin extends javax.swing.JFrame {
         initComponents();
     }
     
+    void openQLbaihat(){
+        qlbaihat qlbh = new qlbaihat();
+        openX(qlbh);
+    }
+    
+    void openX(JInternalFrame x){
+        for(JInternalFrame Allfrm : jDesktopPane1.getAllFrames()){
+            Allfrm.dispose();
+        }
+        x.setLocation((int) (this.getWidth() / (double) 2 - x.getWidth() / (double) 1.7),
+                (this.getHeight() - 20) / 2 - x.getHeight() / 2 - 30);
+        jDesktopPane1.add(x);
+        x.setVisible(true);
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -304,7 +319,7 @@ public class mainAdmin extends javax.swing.JFrame {
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         // TODO add your handling code here:
-        
+        openQLbaihat();
     }//GEN-LAST:event_jButton6ActionPerformed
 
     /**

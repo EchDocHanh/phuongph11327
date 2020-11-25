@@ -16,14 +16,14 @@ import model.TaiKhoan;
  *
  * @author Administrator
  */
-public class LoginPnl extends javax.swing.JPanel {
+public class SignUpPnl extends javax.swing.JPanel {
     
      JPanel jPanel1 ;
     JFrame frame ;
     /**
      * Creates new form LoginPnl
      */
-    public LoginPnl(JPanel jPanel1 , JFrame frame) {
+    public SignUpPnl(JPanel jPanel1 , JFrame frame) {
         initComponents();
         this.jPanel1 = jPanel1;
         this.frame = frame;

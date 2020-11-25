@@ -19,6 +19,24 @@ public class BaiHat {
     private String Lyric;
     private Timestamp NgayTao;
     private String NguoiTao;
+    private String CaSi;
+    private String TheLoai;
+
+    public String getTheLoai() {
+        return TheLoai;
+    }
+
+    public void setTheLoai(String TheLoai) {
+        this.TheLoai = TheLoai;
+    }
+    
+    public String getCaSi() {
+        return CaSi;
+    }
+
+    public void setCaSi(String CaSi) {
+        this.CaSi = CaSi;
+    }
 
     public int getMaBH() {
         return MaBH;

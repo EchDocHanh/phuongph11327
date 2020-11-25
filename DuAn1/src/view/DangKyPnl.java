@@ -181,7 +181,7 @@ public class DangKyPnl extends javax.swing.JPanel {
         jPanel1.setLayout(new BorderLayout());
         jPanel1.setSize(460, 264);
         frame.setSize(460, 360);
-        jPanel1.add(new LoginPnl(jPanel1,frame));
+        jPanel1.add(new SignUpPnl(jPanel1,frame));
         jPanel1.validate();
         jPanel1.repaint();
        

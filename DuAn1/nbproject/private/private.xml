@@ -3,7 +3,13 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Admin/Desktop/DUAN1/phuongph11327/DuAn1/src/view/DangKyPnl.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/qlbaihat.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/model/NgheSi.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/mainAdmin.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/DAO/abstractDAO.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/LoginFrame.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/model/BaiHat.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/DAO/userDAO.java</file>
         </group>
     </open-files>
 </project-private>
