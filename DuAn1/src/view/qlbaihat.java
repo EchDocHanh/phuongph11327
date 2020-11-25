@@ -32,7 +32,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         DefaultTableModel model = (DefaultTableModel) tbbh.getModel();
         model.setRowCount(0);
         try {
-             List<BaiHat> list = bhdao.findAll(null,null);
+             List<BaiHat> list = bhdao.findAll("select * from BAIHAT");
              for(BaiHat x : list){
                  Object[] row = {
                   x.getTenBH(),
@@ -59,7 +59,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         clean();
         try {
             String tenbh = (String) tbbh.getValueAt(this.index, 0);
-            BaiHat model = bhdao.findOne(title, tenbh);
+            BaiHat model = bhdao.findOne("select * from BaiHat where TenBH = ?",txttenbh.getText());
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -68,7 +68,9 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     void addBH(){
         BaiHat model = getModel();
         try {
-            bhdao.insert(title, model);
+            bhdao.insert("insert into BAIHAT MaBH,tenBH,MaAlbuml,thoiLuong,lyric,ngayTao,nguoiTao values (?,?,?,?,?,?,?)"
+                    ,txttenbh.getText(),txtmaalbum.getText(),txtthoiluong.getText(),txtlyric.getText(),txttenbh.getText(),txtcasi.getText(),txttheloai.getText()
+                            );
             this.FillToTable();
             this.clean();
             JOptionPane.showMessageDialog(this,"Thêm thành công");
@@ -79,7 +81,9 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     void updateBH(){
         BaiHat model = getModel();
         try {
-            bhdao.update(title, model);
+            bhdao.update("insert into BAIHAT MaBH,tenBH,MaAlbuml,thoiLuong,lyric,ngayTao,nguoiTao values (?,?,?,?,?,?,?)"
+                    ,txttenbh.getText(),txtmaalbum.getText(),txtthoiluong.getText(),txtlyric.getText(),txttenbh.getText(),txtcasi.getText(),txttheloai.getText()
+                            );
             this.FillToTable();
             JOptionPane.showMessageDialog(this,"Thêm thành công");
         } catch (Exception e) {

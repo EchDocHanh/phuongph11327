@@ -23,7 +23,8 @@ public class userMapper implements RowMapper<TaiKhoan>{
             tk.setTenND(rs.getString("ten"));
             tk.setEmail(rs.getString("Email"));
             tk.setGioiTinh(rs.getBoolean("gioiTinh"));
-            tk.setVaiTro(rs.getBoolean("gioiTinh"));
+            tk.setVaiTro(rs.getBoolean("VaiTro"
+                    + ""));
         } catch (Exception e) {
             System.out.println("Exception in class NewMapper");
         }
