@@ -5,6 +5,7 @@
  */
 package view;
 
+import DAO.userDAO;
 import java.awt.BorderLayout;
 import java.awt.event.MouseListener;
 import javax.swing.JButton;
@@ -28,6 +29,17 @@ public class DangKyPnl extends javax.swing.JPanel {
         this.jPanel1 = jPanel1;
         this.frame = frame;
      
+    }
+  
+    public void dangKy(){
+        try {
+            userDAO dao = new userDAO();
+            
+           dao.insert("insert into USERS (TaiKhoan,matKhau,Email,gioiTinh,vaitro) values (?,?,?,?,0)",
+                   jTextField1.getText(),jTextField1.getText(),jTextField1.getText(),jRadioButton1.isSelected());
+        } catch (Exception e) {
+            System.out.println("Exception in Dang Ky");
+        }
     }
 
     /**
@@ -65,6 +77,11 @@ public class DangKyPnl extends javax.swing.JPanel {
 
         jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_workspace_30px.png"))); // NOI18N
         jButton2.setText("Đăng Ký");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_login_rounded_30px_1.png"))); // NOI18N
         jButton1.setText("Đăng Nhập");
@@ -156,7 +173,8 @@ public class DangKyPnl extends javax.swing.JPanel {
                 .addGap(22, 22, 22))
         );
     }// </editor-fold>//GEN-END:initComponents
-
+    
+   
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
         jPanel1.removeAll();
@@ -169,6 +187,12 @@ public class DangKyPnl extends javax.swing.JPanel {
        
   
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        dangKy();
+        
+    }//GEN-LAST:event_jButton2ActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables

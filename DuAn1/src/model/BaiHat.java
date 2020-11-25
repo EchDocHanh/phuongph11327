@@ -5,6 +5,8 @@
  */
 package model;
 
+import java.sql.Timestamp;
+
 /**
  *
  * @author Admin
@@ -15,7 +17,7 @@ public class BaiHat {
     private int MaAB;
     private int ThoiLuong;
     private String Lyric;
-    private String NgayTao;
+    private Timestamp NgayTao;
     private String NguoiTao;
 
     public int getMaBH() {
@@ -58,11 +60,11 @@ public class BaiHat {
         this.Lyric = Lyric;
     }
 
-    public String getNgayTao() {
+    public Timestamp getNgayTao() {
         return NgayTao;
     }
 
-    public void setNgayTao(String NgayTao) {
+    public void setNgayTao(Timestamp NgayTao) {
         this.NgayTao = NgayTao;
     }
 

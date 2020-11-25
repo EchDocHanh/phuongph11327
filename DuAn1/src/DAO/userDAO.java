@@ -7,50 +7,53 @@ package DAO;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.List;
+import javax.swing.JOptionPane;
+import mapper.userMapper;
 import model.TaiKhoan;
 
 /**
  *
  * @author Admin
  */
-public class userDAO {
+public class userDAO implements dao.GennericDAO<TaiKhoan>{
     
        public TaiKhoan findOne (String sql , Object ... object){
-            TaiKhoan tk = new TaiKhoan();
-            try {
-                
-                PreparedStatement ps = abstractDAO.getConnection().prepareCall(sql);
-               
-               
-                
-                for (int i = 0 ; i < object.length;i++ ) {
-                   ps.setObject(i+1, object[i]);
-                }
-                 ResultSet rs = ps.executeQuery();
-                rs.next();
-                tk.setTaiKhoan(rs.getString("taiKhoan"));
-                tk.setMatKhau(rs.getString("matKhau"));
-             
-                tk.setVaiTro(rs.getBoolean("vaitro"));
-                
-            } catch (Exception e) {
-                 System.out.println("sai3");
-            }
-            return tk;
+           try {
+               return abstractDAO.query(sql,new userMapper(),object).get(0);   
+           } catch (Exception e) {
+               return null;
+           }
             
         }
       
        public void update(String sql , Object ... object){
            try {
-              PreparedStatement ps = abstractDAO.getConnection().prepareCall(sql);
- 
-                for (int i = 0 ; i < object.length;i++ ) {
-                   ps.setObject(i+1, object[i]);
-                }
-                ps.executeUpdate();
-                
+               abstractDAO.update(sql,object);
            } catch (Exception e) {
-           }
+               System.out.println("Exception in class userDAO");           }
            
        }
+
+    @Override
+    public List<TaiKhoan> findAll(String sql, Object... object) {
+       return abstractDAO.query(sql,new userMapper(),object);   
+    }
+
+    @Override
+    public void delete(String sql, Object... object) {
+        try {
+               abstractDAO.update(sql,object);
+           } catch (Exception e) {
+               System.out.println("Exception in class userDAO");           }
+    }
+
+    @Override
+    public void insert(String sql, Object... object) {
+        try {
+               abstractDAO.update(sql,object);
+           } catch (Exception e) {
+               System.out.println("Exception in class userDAO");           }
+    }
+       
 }

@@ -70,6 +70,12 @@ public class TaiKhoan {
     public String getAnh() {
         return Anh;
     }
+    public String getGioiTinh() {
+        return this.GioiTinh?"Nam":"Nữ";
+    }
+    public String getVaiTro() {
+        return this.VaiTro?"Nam":"Nữ";
+    }
 
     public void setAnh(String Anh) {
         this.Anh = Anh;

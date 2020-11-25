@@ -168,18 +168,30 @@ public class LoginPnl extends javax.swing.JPanel {
     }//GEN-LAST:event_jLabel4MouseClicked
     void dangNhap(){
         userDAO dao = new userDAO();
+         try {
+             
+        
         TaiKhoan tk = dao.findOne("select * from USERS where TaiKhoan = ?",jTextField1.getText());
-        if(tk.getMatKhau().equalsIgnoreCase("")){
-            JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
-        }else if(tk.getMatKhau().equalsIgnoreCase(jPasswordField1.getText())){
+         System.out.println(tk.getMatKhau());
+       if(tk.getMatKhau() == null){
+           JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
+           return;
+       }
+       if(tk.getMatKhau().equalsIgnoreCase(jPasswordField1.getText())){
             JOptionPane.showMessageDialog(null,"Đăng Nhập Thành Công");
-           if(tk.isVaiTro()){
+           if(!tk.isVaiTro()){
               new mainAdmin().setVisible(true);
         }
-    }
+    }else{
+               JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu"); 
+           }
+        } catch (Exception e) {
+             JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
+         }
     }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
+        dangNhap();
     }//GEN-LAST:event_jButton1ActionPerformed
 
 
