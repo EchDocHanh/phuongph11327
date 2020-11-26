@@ -18,6 +18,7 @@ public class AlbumMapper implements RowMapper<Album>{
     public Album Maprow(ResultSet rs) {
         Album alb = new Album();
         try {
+            alb.setMaAB(rs.getInt("MaAlbum"));
             alb.setTenAB(rs.getString("tenAlbum"));
             alb.setNguoiTao(rs.getString("nguoiTao"));
             alb.setNgayTao(rs.getTimestamp("ngayTao"));

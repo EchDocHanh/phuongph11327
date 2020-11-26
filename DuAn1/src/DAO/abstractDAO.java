@@ -24,7 +24,7 @@ public class abstractDAO {
      public static String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
     public static String dburl="jdbc:sqlserver://localhost:1433;databaseName=mp3Poly";
     public static String username="sa";
-    public static String password="123";
+    public static String password="songlong";
     
     //nạp driver
     static{
@@ -48,6 +48,7 @@ public class abstractDAO {
     public static <T> List<T> query(String sql,RowMapper<T> mapper,Object...args){
         List<T> results = new ArrayList<>();
         Connection con = getConnection();
+
         PreparedStatement statement = null;
 	ResultSet resultSet = null;
         

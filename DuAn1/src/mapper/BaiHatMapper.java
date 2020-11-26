@@ -17,6 +17,7 @@ public class BaiHatMapper implements RowMapper<BaiHat>{
     public BaiHat Maprow(ResultSet rs) {
         BaiHat bh = new BaiHat();
         try {
+            bh.setMaBH(rs.getInt("MaBH"));
             bh.setTenBH(rs.getString("tenBH"));
             bh.setMaAB(rs.getInt("MaAlbum"));
             bh.setThoiLuong(rs.getInt("thoiLuong"));

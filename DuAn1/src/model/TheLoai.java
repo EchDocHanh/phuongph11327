@@ -48,5 +48,11 @@ public class TheLoai {
     public void setNguoiTao(String NguoiTao) {
         this.NguoiTao = NguoiTao;
     }
+
+    @Override
+    public String toString() {
+        return this.TenTL;
+    }
+    
     
 }

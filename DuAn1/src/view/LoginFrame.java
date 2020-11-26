@@ -221,7 +221,7 @@ public class LoginFrame extends javax.swing.JFrame {
 //       }
 //       if(tk.getMatKhau().equalsIgnoreCase(jPasswordField1.getText())){
 //            JOptionPane.showMessageDialog(null,"Đăng Nhập Thành Công");
-//           if(!tk.isVaiTro()){
+//           if(tk.isVaiTro()){
 //              new mainAdmin().setVisible(true);
 //        }
 //    }else{

@@ -18,6 +18,7 @@ public class NgheSiMapper implements RowMapper<NgheSi>{
     public NgheSi Maprow(ResultSet rs) {
         NgheSi ns = new NgheSi();
         try {
+            ns.setMaNS(rs.getInt("MaNS"));
             ns.setTenNS(rs.getString("ten"));
             ns.setNgayTao(rs.getTimestamp("ngayTao"));
             ns.setNguoiTao(rs.getString("nguoiTao"));
