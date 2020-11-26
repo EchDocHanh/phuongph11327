@@ -11,6 +11,7 @@ import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.BaiHat;
 import DAO.baihatDAO;
+import dao.AlbumDAO;
 import dao.NgheSiDAO;
 import dao.TheLoaiDAO;
 import java.awt.Color;
@@ -20,6 +21,7 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import model.NgheSi;
 import model.TheLoai;
+import model.Album;
 /**
  *
  * @author Admin
@@ -30,6 +32,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     baihatDAO bhdao = new baihatDAO();
     NgheSiDAO nsDao = new NgheSiDAO();
     TheLoaiDAO tldao = new TheLoaiDAO();
+    AlbumDAO aldao = new AlbumDAO();
     int index = 0;
     /**
      * Creates new form qlbaihat
@@ -173,6 +176,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         
         return bh;
     }
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -473,7 +477,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (untility.ValidateUnility.ChekNgheSi(jTextField1.getText())) {
+        if (untility.ValidateUnility.CheckNgheSi(jTextField1.getText())) {
             JOptionPane.showMessageDialog(null,"Bạn Có thể dùng tác giả này");
         }else{
             JOptionPane.showMessageDialog(null,"Có cc");
@@ -481,7 +485,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-      if (untility.ValidateUnility.ChekTheLoai(jTextField2.getText())) {
+      if (untility.ValidateUnility.CheckTheLoai(jTextField2.getText())) {
             JOptionPane.showMessageDialog(null,"Bạn Có thể dùng Thể Loại Này này");
         }else{
             JOptionPane.showMessageDialog(null,"Có cc");

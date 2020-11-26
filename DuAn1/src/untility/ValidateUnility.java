@@ -8,14 +8,17 @@ package untility;
 
 import mapper.NgheSiMapper;
 import mapper.TheLoaiMapper;
+import dao.AlbumDAO;
+import javax.swing.JOptionPane;
+import mapper.AlbumMapper;
 
 /**
  *
  * @author Administrator
  */
 public class ValidateUnility {
-
-    public static boolean ChekNgheSi(String name) {
+    AlbumDAO aldao = new AlbumDAO();
+    public static boolean CheckNgheSi(String name) {
         try {
             String[] arr = name.split(",");
             for (int i = 0; i < arr.length; i++) {
@@ -27,7 +30,7 @@ public class ValidateUnility {
         }
         return true;
     }
-    public static boolean ChekTheLoai(String name) {
+    public static boolean CheckTheLoai(String name) {
         try {
             String[] arr = name.split(",");
             for (int i = 0; i < arr.length; i++) {
@@ -39,5 +42,12 @@ public class ValidateUnility {
         }
         return true;
     }
-
+    public static boolean CheckMaAlbum(String id){
+        try {
+                DAO.abstractDAO.query("select * from ALBUM where MaAlbum = ?",new AlbumMapper(),id).get(0);
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
 }
