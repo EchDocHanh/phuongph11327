@@ -30,7 +30,6 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     baihatDAO bhdao = new baihatDAO();
     NgheSiDAO nsDao = new NgheSiDAO();
     TheLoaiDAO tldao = new TheLoaiDAO();
-    static String x = "";
     int index = 0;
     /**
      * Creates new form qlbaihat
@@ -49,11 +48,21 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                  String tenTheLoai = "";
                List<NgheSi> list2  = nsDao.findAll("select * from BAIHAT_NGHESI inner join NGHESI on BAIHAT_NGHESI.MaNS = NGHESI.MaNS where MaBH = ?",x.getMaBH());
                List<TheLoai> list3  = tldao.findAll("select * from BAIHAT_THElOAI inner join THELOAI on BAIHAT_THElOAI.MaTL = THELOAI.MaTL where MaBH = ?",x.getMaBH());
-                for (int i = 0; i < list2.size(); i++) {
-                   tenNS = tenNS +","+ list2.get(i).getTenNS();  
+                 for (int i = 0; i < list2.size(); i++) {
+                    if(!tenNS.equalsIgnoreCase("")){
+                          tenNS = tenNS+","+list2.get(i).getTenNS();
+                    }else{
+                       tenNS = list2.get(i).getTenNS(); 
+                    }
+                
                  }
                 for (int i = 0; i < list3.size(); i++) {
-                   tenTheLoai = tenTheLoai +","+ list3.get(i).getTenTL();  
+                    if(!tenTheLoai.equalsIgnoreCase("")){
+                           tenTheLoai = tenTheLoai +","+list3.get(i).getTenTL() ;  
+                    }else{
+                        tenTheLoai = list3.get(i).getTenTL() ;  
+                    }
+                  
                  }
                  Object[] row = {
                   x.getTenBH(),
@@ -82,21 +91,31 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             String tenbh = (String) tbbh.getValueAt(this.index, 0);
             BaiHat model = bhdao.findOne("select * from BaiHat where TenBH = ?",tenbh);
               String tenNS = "";
-                 String tenTheLoai = "";
+              String tenTheLoai = "";
                List<NgheSi> list2  = nsDao.findAll("select * from BAIHAT_NGHESI inner join NGHESI on BAIHAT_NGHESI.MaNS = NGHESI.MaNS where MaBH = ?",model.getMaBH());
                List<TheLoai> list3  = tldao.findAll("select * from BAIHAT_THElOAI inner join THELOAI on BAIHAT_THElOAI.MaTL = THELOAI.MaTL where MaBH = ?",model.getMaBH());
                 for (int i = 0; i < list2.size(); i++) {
-                   tenNS = tenNS +","+ list2.get(i).getTenNS();  
+                    if(!tenNS.equalsIgnoreCase("")){
+                          tenNS = tenNS+","+list2.get(i).getTenNS();
+                    }else{
+                       tenNS = list2.get(i).getTenNS(); 
+                    }
+                
                  }
                 for (int i = 0; i < list3.size(); i++) {
-                   tenTheLoai = tenTheLoai +","+ list3.get(i).getTenTL();  
+                    if(!tenTheLoai.equalsIgnoreCase("")){
+                           tenTheLoai = tenTheLoai +","+list3.get(i).getTenTL() ;  
+                    }else{
+                        tenTheLoai = list3.get(i).getTenTL() ;  
+                    }
+                  
                  }
             txttenbh.setText(model.getTenBH());
             txtmaalbum.setText(String.valueOf(model.getMaAB()));
             txtthoiluong.setText(String.valueOf(model.getThoiLuong()));
             txtlyric.setText(model.getLyric());
-            jLabel3.setText(tenNS);
-            jLabel9.setText(tenTheLoai);
+            jTextField1.setText(tenNS);
+            jTextField2.setText(tenTheLoai);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -182,10 +201,10 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jLabel3 = new javax.swing.JLabel();
         jButton6 = new javax.swing.JButton();
-        jLabel9 = new javax.swing.JLabel();
         jButton7 = new javax.swing.JButton();
+        jTextField1 = new javax.swing.JTextField();
+        jTextField2 = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -298,20 +317,14 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             }
         });
 
-        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel3.setText("....");
-
-        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_joyent_30px.png"))); // NOI18N
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_checked_checkbox_30px.png"))); // NOI18N
         jButton6.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
 
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("....");
-
-        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_joyent_30px.png"))); // NOI18N
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_checked_checkbox_30px.png"))); // NOI18N
         jButton7.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
@@ -338,25 +351,27 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                                 .addGap(31, 31, 31)
                                 .addComponent(jButton4)
                                 .addGap(30, 30, 30)
-                                .addComponent(jButton5))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(txtthoiluong, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                                .addComponent(jButton5))))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(jLabel2)
+                                .addComponent(jLabel4))
+                            .addGap(39, 39, 39)
+                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                .addComponent(jLabel5)
+                                .addComponent(txtthoiluong, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(jPanel2Layout.createSequentialGroup()
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -367,36 +382,41 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(txttenbh, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                    .addComponent(txtthoiluong))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jLabel4)
-                    .addComponent(jLabel6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtmaalbum, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel7)
-                    .addComponent(jLabel8))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGap(2, 2, 2)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jButton5)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                .addComponent(jButton3)
-                                .addComponent(jButton4))))
-                    .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txttenbh, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                            .addComponent(txtthoiluong))
+                        .addGap(18, 18, 18)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4)
+                            .addComponent(jLabel6))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtmaalbum, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton6))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel7)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addComponent(jLabel8)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextField2)
+                                .addGap(72, 72, 72))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addComponent(jButton7)
+                                .addGap(33, 33, 33)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jButton5)
+                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                        .addComponent(jButton3)
+                                        .addComponent(jButton4)))))))
                 .addGap(35, 35, 35))
         );
 
@@ -453,48 +473,19 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        // TODO add your handling code here:
-        
-        new FindItem<NgheSi>(nsDao.findAll("select * from NGHESI"),"Tên Nghệ Sĩ").setVisible(true);
-            
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    sleep(1000);
-                } catch (Exception e) {
-                }
-                
-              if(jLabel3.getText().equalsIgnoreCase("....")){
-            jLabel3.setText(x);
+        if (untility.ValidateUnility.ChekNgheSi(jTextField1.getText())) {
+            JOptionPane.showMessageDialog(null,"Bạn Có thể dùng tác giả này");
         }else{
-             jLabel3.setText(jLabel3.getText() + " , "+x);
+            JOptionPane.showMessageDialog(null,"Có cc");
         }
-            }
-           
-        }.start();
-        
     }//GEN-LAST:event_jButton6ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-       new FindItem<TheLoai>(tldao.findAll("select * from THELOAI"),"Tên Thể Loại").setVisible(true);
-            
-        new Thread(){
-            @Override
-            public void run() {
-                try {
-                    sleep(1000);
-                } catch (Exception e) {
-                }
-                
-              if(jLabel9.getText().equalsIgnoreCase("....")){
-            jLabel9.setText(x);
+      if (untility.ValidateUnility.ChekTheLoai(jTextField2.getText())) {
+            JOptionPane.showMessageDialog(null,"Bạn Có thể dùng Thể Loại Này này");
         }else{
-             jLabel9.setText(jLabel9.getText() + ","+x);
+            JOptionPane.showMessageDialog(null,"Có cc");
         }
-            }
-           
-        }.start();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
@@ -511,17 +502,17 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tbbh;
     private javax.swing.JTextArea txtlyric;

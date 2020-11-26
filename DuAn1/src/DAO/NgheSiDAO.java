@@ -17,12 +17,22 @@ public class NgheSiDAO implements GennericDAO<NgheSi>{
 
     @Override
     public List<NgheSi> findAll(String sql, Object... object) {
+         try {
         return DAO.abstractDAO.query(sql,new NgheSiMapper(),object);   
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override
     public NgheSi findOne(String sql, Object... object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+            return DAO.abstractDAO.query(sql,new NgheSiMapper(),object).get(0); 
+        } catch (Exception e) {
+            return null;
+        }
+      
+         
     }
 
     @Override
@@ -40,7 +50,7 @@ public class NgheSiDAO implements GennericDAO<NgheSi>{
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
     public static void main(String[] args) {
-        System.out.println( new NgheSiDAO().findAll("select * from NGHESI").get(0).getTenNS());
+        System.out.println( new NgheSiDAO().findOne("select * from NGHESI where Mans = 22"));
        
     }
     
