@@ -157,7 +157,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     }
     void updateBH(){
         try {
-<<<<<<< HEAD
+
             abstractDAO.update("update BAIHAT set tenBH = ? , MaAlbum = ? , thoiLuong = ? ,lyric = ? where tenBH = ?"
             ,txttenbh.getText(),Integer.parseInt(txtmaalbum.getText()),Integer.parseInt(txtthoiluong.getText()),txtlyric.getText(),TenBaiHat);
             
@@ -180,10 +180,10 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                int mbh =  DAO.abstractDAO.query("select * from BAIHAT where tenBH = ?",new BaiHatMapper(),txttenbh.getText()).get(0).getMaBH();
                 abstractDAO.update("insert into BAIHAT_NGHESI(MaBH,MaNS)VALUES(?,?)",mbh,mns);
             }
-=======
+
             bhdao.update("update BAIHAT set tenBH = ? ,MaAlbum = ? ,thoiLuong = ?,lyric = ?"
                     ,txttenbh.getText(),txtmaalbum.getText(),txtthoiluong.getText(),txtlyric.getText());
->>>>>>> 4b1a656ed3e4f2c1b1c2880810e61163cfe9e412
+
             this.FillToTable();
             JOptionPane.showMessageDialog(this,"sửa thành công");
         } catch (Exception e) {
@@ -196,7 +196,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     void deleteBH(){
             String tenbh = txttenbh.getText();
             try {
-<<<<<<< HEAD
+
             
                  int mbhx =  DAO.abstractDAO.query("select * from BAIHAT where tenBH = ?",new BaiHatMapper(),txttenbh.getText()).get(0).getMaBH();
             
@@ -206,9 +206,9 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             abstractDAO.update("delete PLAYLIST where MaBH = ?",mbhx);
             
             abstractDAO.update("delete BAIHAT where MaBH = ?",mbhx);
-=======
+
                 bhdao.delete("delete BaiHat where tenbh = ?", tenbh);
->>>>>>> 4b1a656ed3e4f2c1b1c2880810e61163cfe9e412
+
                 this.FillToTable();
                 this.clean();
                 JOptionPane.showMessageDialog(this, "Xóa thành công!");
