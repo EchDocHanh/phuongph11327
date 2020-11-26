@@ -208,32 +208,32 @@ public class LoginFrame extends javax.swing.JFrame {
         
     }//GEN-LAST:event_jButton2ActionPerformed
 
-     void dangNhap(){
-        userDAO dao = new userDAO();
-         try {
-             
-        
-        TaiKhoan tk = dao.findOne("select * from USERS where TaiKhoan = ?",jTextField1.getText());
-         System.out.println(tk.getMatKhau());
-       if(tk.getMatKhau() == null){
-           JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
-           return;
-       }
-       if(tk.getMatKhau().equalsIgnoreCase(jPasswordField1.getText())){
-            JOptionPane.showMessageDialog(null,"Đăng Nhập Thành Công");
-           if(tk.isVaiTro()){
-              new mainAdmin().setVisible(true);
-        }
-    }else{
-               JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu"); 
-           }
-        } catch (Exception e) {
-             JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
-         }
-    }
+//     void dangNhap(){
+//        userDAO dao = new userDAO();
+//         try {
+//             
+//        
+//        TaiKhoan tk = dao.findOne("select * from USERS where TaiKhoan = ?",jTextField1.getText());
+//         System.out.println(tk.getMatKhau());
+//       if(tk.getMatKhau() == null){
+//           JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
+//           return;
+//       }
+//       if(tk.getMatKhau().equalsIgnoreCase(jPasswordField1.getText())){
+//            JOptionPane.showMessageDialog(null,"Đăng Nhập Thành Công");
+//           if(tk.isVaiTro()){
+//              new mainAdmin().setVisible(true);
+//        }
+//    }else{
+//               JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu"); 
+//           }
+//        } catch (Exception e) {
+//             JOptionPane.showMessageDialog(null,"Sai Tài Khoản Hoặc Mật Khẩu");
+//         }
+//    }
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-       dangNhap();
-//       new mainAdmin().setVisible(true);
+       //dangNhap();
+       new mainAdmin().setVisible(true);
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jLabel4MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jLabel4MouseClicked

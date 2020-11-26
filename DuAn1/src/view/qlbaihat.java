@@ -40,10 +40,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
      */
     public qlbaihat() {
         initComponents();
-        tabs.setSelectedIndex(1);
-        FillToTable();
-        
-        
+        tabs.setSelectedIndex(1);   
     }
     void FillToTable(){
         DefaultTableModel model = (DefaultTableModel) tbbh.getModel();
@@ -132,7 +129,6 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     
     void addBH(){
         BaiHat model = getModel();
-        
         try {
             
             abstractDAO.update("insert into BAIHAT(tenBH,MaAlbum,thoiLuong,lyric)VALUES(?,?,?,?)"
@@ -161,6 +157,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     }
     void updateBH(){
         try {
+<<<<<<< HEAD
             abstractDAO.update("update BAIHAT set tenBH = ? , MaAlbum = ? , thoiLuong = ? ,lyric = ? where tenBH = ?"
             ,txttenbh.getText(),Integer.parseInt(txtmaalbum.getText()),Integer.parseInt(txtthoiluong.getText()),txtlyric.getText(),TenBaiHat);
             
@@ -183,6 +180,10 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                int mbh =  DAO.abstractDAO.query("select * from BAIHAT where tenBH = ?",new BaiHatMapper(),txttenbh.getText()).get(0).getMaBH();
                 abstractDAO.update("insert into BAIHAT_NGHESI(MaBH,MaNS)VALUES(?,?)",mbh,mns);
             }
+=======
+            bhdao.update("update BAIHAT set tenBH = ? ,MaAlbum = ? ,thoiLuong = ?,lyric = ?"
+                    ,txttenbh.getText(),txtmaalbum.getText(),txtthoiluong.getText(),txtlyric.getText());
+>>>>>>> 4b1a656ed3e4f2c1b1c2880810e61163cfe9e412
             this.FillToTable();
             JOptionPane.showMessageDialog(this,"sửa thành công");
         } catch (Exception e) {
@@ -195,6 +196,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     void deleteBH(){
             String tenbh = txttenbh.getText();
             try {
+<<<<<<< HEAD
             
                  int mbhx =  DAO.abstractDAO.query("select * from BAIHAT where tenBH = ?",new BaiHatMapper(),txttenbh.getText()).get(0).getMaBH();
             
@@ -204,6 +206,9 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             abstractDAO.update("delete PLAYLIST where MaBH = ?",mbhx);
             
             abstractDAO.update("delete BAIHAT where MaBH = ?",mbhx);
+=======
+                bhdao.delete("delete BaiHat where tenbh = ?", tenbh);
+>>>>>>> 4b1a656ed3e4f2c1b1c2880810e61163cfe9e412
                 this.FillToTable();
                 this.clean();
                 JOptionPane.showMessageDialog(this, "Xóa thành công!");
@@ -266,6 +271,23 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         setMaximizable(true);
         setEnabled(false);
         setVisible(false);
+        addInternalFrameListener(new javax.swing.event.InternalFrameListener() {
+            public void internalFrameActivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosed(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameClosing(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeactivated(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameDeiconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameIconified(javax.swing.event.InternalFrameEvent evt) {
+            }
+            public void internalFrameOpened(javax.swing.event.InternalFrameEvent evt) {
+                formInternalFrameOpened(evt);
+            }
+        });
 
         tabs.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
@@ -498,7 +520,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_tbbhMouseClicked
-
+   
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         updateBH();
@@ -525,6 +547,11 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(null,"Có cc");
         }
     }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void formInternalFrameOpened(javax.swing.event.InternalFrameEvent evt) {//GEN-FIRST:event_formInternalFrameOpened
+        // TODO add your handling code here:
+        FillToTable();
+    }//GEN-LAST:event_formInternalFrameOpened
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
