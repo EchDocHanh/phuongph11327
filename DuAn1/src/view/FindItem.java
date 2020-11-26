@@ -86,7 +86,7 @@ public class FindItem<T> extends javax.swing.JFrame {
     private void jTable1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable1MouseClicked
         // TODO add your handling code here:
      
-          qlbaihat.x =  (String) jTable1.getValueAt(jTable1.getSelectedRow(), jTable1.getSelectedColumn());
+         
             this.dispose(); 
      
         
