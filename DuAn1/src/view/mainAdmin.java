@@ -25,8 +25,7 @@ public class mainAdmin extends javax.swing.JFrame {
     }
     
     void openQLbaihat(){
-        qlbaihat qlbh = new qlbaihat();
-        openX(qlbh);
+          openX(new qlbaihat());
     }
     
     void openX(JInternalFrame x){
@@ -78,6 +77,11 @@ public class mainAdmin extends javax.swing.JFrame {
         jButton2.setOpaque(true);
         jButton2.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_edit_account_50px_1.png"))); // NOI18N
         jButton2.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         jButton3.setBackground(new java.awt.Color(102, 255, 204));
         jButton3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -322,6 +326,11 @@ public class mainAdmin extends javax.swing.JFrame {
         openQLbaihat();
     }//GEN-LAST:event_jButton6ActionPerformed
 
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+      
+    }//GEN-LAST:event_jButton2ActionPerformed
+        
     /**
      * @param args the command line arguments
      */

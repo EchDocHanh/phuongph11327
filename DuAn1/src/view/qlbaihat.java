@@ -5,13 +5,21 @@
  */
 package view;
 
+import DAO.abstractDAO;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.table.DefaultTableModel;
 import model.BaiHat;
 import DAO.baihatDAO;
+import dao.NgheSiDAO;
+import dao.TheLoaiDAO;
 import java.awt.Color;
+import static java.lang.Thread.sleep;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import model.NgheSi;
+import model.TheLoai;
 /**
  *
  * @author Admin
@@ -20,6 +28,9 @@ import javax.swing.JOptionPane;
 public class qlbaihat extends javax.swing.JInternalFrame {
     
     baihatDAO bhdao = new baihatDAO();
+    NgheSiDAO nsDao = new NgheSiDAO();
+    TheLoaiDAO tldao = new TheLoaiDAO();
+    static String x = "";
     int index = 0;
     /**
      * Creates new form qlbaihat
@@ -27,6 +38,9 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     public qlbaihat() {
         initComponents();
         tabs.setSelectedIndex(1);
+        FillToTable();
+        
+        
     }
     void FillToTable(){
         DefaultTableModel model = (DefaultTableModel) tbbh.getModel();
@@ -34,12 +48,22 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         try {
              List<BaiHat> list = bhdao.findAll("select * from BAIHAT");
              for(BaiHat x : list){
+                 String tenNS = "";
+                 String tenTheLoai = "";
+               List<NgheSi> list2  = nsDao.findAll("select * from BAIHAT_NGHESI inner join NGHESI on BAIHAT_NGHESI.MaNS = NGHESI.MaNS where MaBH = ?",x.getMaBH());
+               List<TheLoai> list3  = tldao.findAll("select * from BAIHAT_THElOAI inner join THELOAI on BAIHAT_THElOAI.MaTL = THELOAI.MaTL where MaBH = ?",x.getMaBH());
+                for (int i = 0; i < list2.size(); i++) {
+                   tenNS = tenNS +","+ list2.get(i).getTenNS();  
+                 }
+                for (int i = 0; i < list3.size(); i++) {
+                   tenTheLoai = tenTheLoai +","+ list3.get(i).getTenTL();  
+                 }
                  Object[] row = {
                   x.getTenBH(),
                   x.getMaAB(),
-                  x.getCaSi(),
+                  tenNS,
                   x.getThoiLuong(),
-                  x.getTheLoai()
+                  tenTheLoai
                  };
                  model.addRow(row);
              } 
@@ -52,14 +76,30 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         txtmaalbum.setBackground(Color.white);
         txtlyric.setBackground(Color.white);
         txtthoiluong.setBackground(Color.white);
-        txtcasi.setText("Tên ca sĩ");
-        txttheloai.setText("Tên thể loại");
+        
     }
     void editTable(){
         clean();
         try {
+            
             String tenbh = (String) tbbh.getValueAt(this.index, 0);
-            BaiHat model = bhdao.findOne("select * from BaiHat where TenBH = ?",txttenbh.getText());
+            BaiHat model = bhdao.findOne("select * from BaiHat where TenBH = ?",tenbh);
+              String tenNS = "";
+                 String tenTheLoai = "";
+               List<NgheSi> list2  = nsDao.findAll("select * from BAIHAT_NGHESI inner join NGHESI on BAIHAT_NGHESI.MaNS = NGHESI.MaNS where MaBH = ?",model.getMaBH());
+               List<TheLoai> list3  = tldao.findAll("select * from BAIHAT_THElOAI inner join THELOAI on BAIHAT_THElOAI.MaTL = THELOAI.MaTL where MaBH = ?",model.getMaBH());
+                for (int i = 0; i < list2.size(); i++) {
+                   tenNS = tenNS +","+ list2.get(i).getTenNS();  
+                 }
+                for (int i = 0; i < list3.size(); i++) {
+                   tenTheLoai = tenTheLoai +","+ list3.get(i).getTenTL();  
+                 }
+            txttenbh.setText(model.getTenBH());
+            txtmaalbum.setText(String.valueOf(model.getMaAB()));
+            txtthoiluong.setText(String.valueOf(model.getThoiLuong()));
+            txtlyric.setText(model.getLyric());
+            jLabel3.setText(tenNS);
+            jLabel9.setText(tenTheLoai);
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -67,10 +107,11 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     }
     void addBH(){
         BaiHat model = getModel();
+        
         try {
-            bhdao.insert("insert into BAIHAT MaBH,tenBH,MaAlbuml,thoiLuong,lyric,ngayTao,nguoiTao values (?,?,?,?,?,?,?)"
-                    ,txttenbh.getText(),txtmaalbum.getText(),txtthoiluong.getText(),txtlyric.getText(),txttenbh.getText(),txtcasi.getText(),txttheloai.getText()
-                            );
+            
+            abstractDAO.update("insert into BAIHAT(tenBH,MaAlbum,thoiLuong,lyric)VALUES(?,?,?,?)"
+                    ,txttenbh.getText(),Integer.parseInt(txtmaalbum.getText()),Integer.parseInt(txtthoiluong.getText()),txtlyric.getText());
             this.FillToTable();
             this.clean();
             JOptionPane.showMessageDialog(this,"Thêm thành công");
@@ -82,7 +123,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         BaiHat model = getModel();
         try {
             bhdao.update("insert into BAIHAT MaBH,tenBH,MaAlbuml,thoiLuong,lyric,ngayTao,nguoiTao values (?,?,?,?,?,?,?)"
-                    ,txttenbh.getText(),txtmaalbum.getText(),txtthoiluong.getText(),txtlyric.getText(),txttenbh.getText(),txtcasi.getText(),txttheloai.getText()
+                    ,txttenbh.getText(),txtmaalbum.getText(),txtthoiluong.getText(),txtlyric.getText(),txttenbh.getText()
                             );
             this.FillToTable();
             JOptionPane.showMessageDialog(this,"Thêm thành công");
@@ -107,8 +148,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         txtmaalbum.setText(String.valueOf(model.getMaAB()));
         txtlyric.setText(model.getLyric());
         txtthoiluong.setText(String.valueOf(model.getThoiLuong()));
-        txtcasi.setText(model.getCaSi());
-        txttheloai.setText(model.getTheLoai());
+        
     }
     BaiHat getModel(){
         BaiHat bh = new BaiHat();
@@ -116,8 +156,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         bh.setMaAB(Integer.parseInt(txtmaalbum.getText()));
         bh.setLyric(txtlyric.getText());
         bh.setThoiLuong(Integer.parseInt(txtthoiluong.getText()));
-        bh.setCaSi(txtcasi.getText());
-        bh.setTheLoai(txttheloai.getText());
+        
         return bh;
     }
     /**
@@ -148,8 +187,10 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        txtcasi = new javax.swing.JTextField();
-        txttheloai = new javax.swing.JTextField();
+        jLabel3 = new javax.swing.JLabel();
+        jButton6 = new javax.swing.JButton();
+        jLabel9 = new javax.swing.JLabel();
+        jButton7 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -170,7 +211,15 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             new String [] {
                 "TÊN BÀI HÁT", "MÃ ALBUM", "CA SĨ", "THỜI LƯỢNG", "THỂ LOẠI"
             }
-        ));
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
         tbbh.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 tbbhMouseClicked(evt);
@@ -186,7 +235,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 308, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 320, Short.MAX_VALUE)
         );
 
         tabs.addTab("Danh Sách", new javax.swing.ImageIcon(getClass().getResource("/data/icons8_search_property_35px.png")), jPanel1); // NOI18N
@@ -237,6 +286,26 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             }
         });
 
+        jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel3.setText("....");
+
+        jButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_joyent_30px.png"))); // NOI18N
+        jButton6.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton6ActionPerformed(evt);
+            }
+        });
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel9.setText("....");
+
+        jButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_joyent_30px.png"))); // NOI18N
+        jButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton7ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -245,20 +314,10 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel4))
-                        .addGap(39, 39, 39)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel5)
-                            .addComponent(txtthoiluong, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                             .addComponent(jLabel7)
-                            .addComponent(txtmaalbum, javax.swing.GroupLayout.PREFERRED_SIZE, 164, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(txtmaalbum))
                         .addGap(39, 39, 39)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel8)
@@ -268,9 +327,24 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                                 .addComponent(jButton4)
                                 .addGap(30, 30, 30)
                                 .addComponent(jButton5))
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(txttheloai, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)
-                                .addComponent(txtcasi, javax.swing.GroupLayout.Alignment.LEADING)))))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jLabel9, javax.swing.GroupLayout.PREFERRED_SIZE, 250, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel2)
+                            .addComponent(jLabel4))
+                        .addGap(39, 39, 39)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel5)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(txtthoiluong, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE))))
                 .addContainerGap(44, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
@@ -280,34 +354,38 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtthoiluong, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txttenbh, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
+                    .addComponent(txtthoiluong))
                 .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel4)
                     .addComponent(jLabel6))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtmaalbum, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(txtcasi, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, Short.MAX_VALUE)
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(txtmaalbum, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(18, 18, 18)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel7)
                     .addComponent(jLabel8))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txttheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
+                        .addGap(2, 2, 2)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButton7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jButton5)
                             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                                 .addComponent(jButton3)
                                 .addComponent(jButton4))))
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(46, Short.MAX_VALUE))
+                .addGap(35, 35, 35))
         );
 
         tabs.addTab("Cập nhật", new javax.swing.ImageIcon(getClass().getResource("/data/icons8_edit_35px_1.png")), jPanel2); // NOI18N
@@ -347,7 +425,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             this.index = tbbh.rowAtPoint(evt.getPoint()); //lấy vị trí dòng được chọn
             if (this.index >= 0) {
                 this.editTable();
-                tabs.setSelectedIndex(0);
+                tabs.setSelectedIndex(1);
             }
         }
     }//GEN-LAST:event_tbbhMouseClicked
@@ -362,29 +440,76 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         deleteBH();
     }//GEN-LAST:event_jButton5ActionPerformed
 
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        // TODO add your handling code here:
+        
+        new FindItem<NgheSi>(nsDao.findAll("select * from NGHESI"),"Tên Nghệ Sĩ").setVisible(true);
+            
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    sleep(1000);
+                } catch (Exception e) {
+                }
+                
+              if(jLabel3.getText().equalsIgnoreCase("....")){
+            jLabel3.setText(x);
+        }else{
+             jLabel3.setText(jLabel3.getText() + " , "+x);
+        }
+            }
+           
+        }.start();
+        
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+       new FindItem<TheLoai>(tldao.findAll("select * from THELOAI"),"Tên Thể Loại").setVisible(true);
+            
+        new Thread(){
+            @Override
+            public void run() {
+                try {
+                    sleep(1000);
+                } catch (Exception e) {
+                }
+                
+              if(jLabel9.getText().equalsIgnoreCase("....")){
+            jLabel9.setText(x);
+        }else{
+             jLabel9.setText(jLabel9.getText() + ","+x);
+        }
+            }
+           
+        }.start();
+    }//GEN-LAST:event_jButton7ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tbbh;
-    private javax.swing.JTextField txtcasi;
     private javax.swing.JTextArea txtlyric;
     private javax.swing.JTextField txtmaalbum;
     private javax.swing.JTextField txttenbh;
-    private javax.swing.JTextField txttheloai;
     private javax.swing.JTextField txtthoiluong;
     // End of variables declaration//GEN-END:variables
 }

@@ -18,6 +18,7 @@ public class userMapper implements RowMapper<TaiKhoan>{
     public TaiKhoan Maprow(ResultSet rs) {
         TaiKhoan tk = new TaiKhoan();
         try {
+            tk.setMaND(rs.getInt("MaND"));
             tk.setTaiKhoan(rs.getString("taiKhoan"));
             tk.setMatKhau(rs.getString("matKhau"));
             tk.setTenND(rs.getString("ten"));

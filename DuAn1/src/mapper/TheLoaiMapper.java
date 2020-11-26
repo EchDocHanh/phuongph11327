@@ -18,6 +18,7 @@ public class TheLoaiMapper implements RowMapper<TheLoai>{
     public TheLoai Maprow(ResultSet rs) {
       TheLoai tl = new TheLoai();
         try {
+            tl.setMaTL(rs.getInt("MaTL"));
             tl.setTenTL(rs.getString("tenTL"));
             tl.setNgayTao(rs.getTimestamp("ngayTao"));
             tl.setNguoiTao(rs.getString("nguoiTao"));
