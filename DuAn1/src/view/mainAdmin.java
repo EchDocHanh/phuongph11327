@@ -27,7 +27,9 @@ public class mainAdmin extends javax.swing.JFrame {
     void openQLbaihat(){
           openX(new qlbaihat());
     }
-    
+    void openQLTK(){
+        openX(new qlTaiKhoan());
+    }
     void openX(JInternalFrame x){
         for(JInternalFrame Allfrm : jDesktopPane1.getAllFrames()){
             Allfrm.dispose();
@@ -328,7 +330,7 @@ public class mainAdmin extends javax.swing.JFrame {
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
-      
+      openQLTK();
     }//GEN-LAST:event_jButton2ActionPerformed
         
     /**

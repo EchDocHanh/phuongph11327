@@ -71,10 +71,10 @@ public class TaiKhoan {
         return Anh;
     }
     public String getGioiTinh() {
-        return this.GioiTinh?"Nam":"Nữ";
+        return this.GioiTinh?"Nữ":"Nam";
     }
     public String getVaiTro() {
-        return this.VaiTro?"Nam":"Nữ";
+        return this.VaiTro?"admin":"user";
     }
 
     public void setAnh(String Anh) {
