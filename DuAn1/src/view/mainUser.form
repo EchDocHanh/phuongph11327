@@ -26,7 +26,10 @@
   <Layout>
     <DimensionLayout dim="0">
       <Group type="103" groupAlignment="0" attributes="0">
-          <Component id="jPanel3" alignment="0" max="32767" attributes="0"/>
+          <Group type="102" alignment="0" attributes="0">
+              <Component id="jPanel3" min="-2" max="-2" attributes="0"/>
+              <EmptySpace min="0" pref="366" max="32767" attributes="0"/>
+          </Group>
       </Group>
     </DimensionLayout>
     <DimensionLayout dim="1">
@@ -62,12 +65,12 @@
                               <Component id="jPanel12" alignment="0" max="32767" attributes="0"/>
                               <Component id="jPanel13" max="32767" attributes="0"/>
                               <Component id="jPanel17" alignment="1" max="32767" attributes="0"/>
-                              <Group type="102" alignment="1" attributes="0">
-                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                              <Group type="102" attributes="0">
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="jPanel14" alignment="1" min="-2" max="-2" attributes="0"/>
-                                      <Component id="jPanel15" alignment="1" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jPanel15" min="-2" max="-2" attributes="0"/>
+                                      <Component id="jPanel14" alignment="0" min="-2" max="-2" attributes="0"/>
                                   </Group>
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
@@ -88,11 +91,11 @@
                           <Component id="jPanel13" min="-2" pref="85" max="-2" attributes="0"/>
                           <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel12" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace type="separate" max="-2" attributes="0"/>
                           <Component id="jPanel15" min="-2" pref="85" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="jPanel14" min="-2" pref="85" max="-2" attributes="0"/>
                           <EmptySpace type="unrelated" max="-2" attributes="0"/>
+                          <Component id="jPanel14" min="-2" pref="85" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
                           <Component id="jPanel17" min="-2" pref="85" max="-2" attributes="0"/>
                       </Group>
                       <Group type="102" alignment="0" attributes="0">
@@ -279,7 +282,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel6">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/data/icons8_itunes_50px_1.png"/>
+                      <Image iconType="3" name="/data/artists.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -325,7 +328,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel8">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/data/icons8_itunes_50px_1.png"/>
+                      <Image iconType="3" name="/data/radio.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -371,7 +374,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel10">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/data/icons8_itunes_50px_1.png"/>
+                      <Image iconType="3" name="/data/playlist.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -417,7 +420,7 @@
                 <Component class="javax.swing.JLabel" name="jLabel58">
                   <Properties>
                     <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-                      <Image iconType="3" name="/data/icons8_itunes_50px_1.png"/>
+                      <Image iconType="3" name="/data/setting.png"/>
                     </Property>
                   </Properties>
                 </Component>
@@ -438,7 +441,7 @@
                   <Group type="102" alignment="1" attributes="0">
                       <EmptySpace max="32767" attributes="0"/>
                       <Component id="jLabel49" min="-2" pref="235" max="-2" attributes="0"/>
-                      <EmptySpace min="-2" pref="330" max="-2" attributes="0"/>
+                      <EmptySpace min="-2" pref="280" max="-2" attributes="0"/>
                       <Component id="jPanel9" min="-2" max="-2" attributes="0"/>
                   </Group>
               </Group>
@@ -1244,7 +1247,7 @@
                               <Component id="jLabel51" min="-2" pref="195" max="-2" attributes="0"/>
                           </Group>
                       </Group>
-                      <EmptySpace pref="43" max="32767" attributes="0"/>
+                      <EmptySpace max="32767" attributes="0"/>
                   </Group>
               </Group>
             </DimensionLayout>
