@@ -6,6 +6,8 @@
 package dao;
 
 import java.util.List;
+import mapper.AlbumMapper;
+import mapper.userMapper;
 import model.Album;
 
 /**
@@ -16,12 +18,16 @@ public class AlbumDAO implements  GennericDAO<Album>{
 
     @Override
     public List<Album> findAll(String sql, Object... object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return DAO.abstractDAO.query(sql,new AlbumMapper(),object);   
     }
 
     @Override
     public Album findOne(String sql, Object... object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        try {
+               return DAO.abstractDAO.query(sql,new AlbumMapper(),object).get(0);   
+           } catch (Exception e) {
+               return null;
+           }
     }
 
     @Override

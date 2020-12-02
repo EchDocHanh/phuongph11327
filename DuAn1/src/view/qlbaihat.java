@@ -89,6 +89,10 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         txtmaalbum.setBackground(Color.white);
         txtlyric.setBackground(Color.white);
         txtthoiluong.setBackground(Color.white);
+        txttenbh.setText("");
+        txtmaalbum.setText("");
+        txtlyric.setText("");
+        txtthoiluong.setText("");
         
     }
     void editTable(){
@@ -122,7 +126,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             txtmaalbum.setText(String.valueOf(model.getMaAB()));
             txtthoiluong.setText(String.valueOf(model.getThoiLuong()));
             txtlyric.setText(model.getLyric());
-            jTextField1.setText(tenNS);
+            txttheloai.setText(tenNS);
             jTextField2.setText(tenTheLoai);
             
         } catch (Exception e) {
@@ -143,7 +147,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                int mbh =  DAO.abstractDAO.query("select * from BAIHAT where tenBH = ?",new BaiHatMapper(),txttenbh.getText()).get(0).getMaBH();
                 abstractDAO.update("insert into BAIHAT_THElOAI(MaBH,MaTL)VALUES(?,?)",mbh,mtl);
             }
-            String[] arr2 = jTextField1.getText().split(",");
+            String[] arr2 = txttheloai.getText().split(",");
             for (int i = 0; i < arr2.length; i++) {
                 String string = arr2[i];
                int mns =  DAO.abstractDAO.query("select * from NGHESI where ten = ?",new NgheSiMapper(),string).get(0).getMaNS();
@@ -176,7 +180,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                int mbh =  DAO.abstractDAO.query("select * from BAIHAT where tenBH = ?",new BaiHatMapper(),txttenbh.getText()).get(0).getMaBH();
                 abstractDAO.update("insert into BAIHAT_THElOAI(MaBH,MaTL)VALUES(?,?)",mbh,mtl);
             }
-            String[] arr2 = jTextField1.getText().split(",");
+            String[] arr2 = txttheloai.getText().split(",");
             for (int i = 0; i < arr2.length; i++) {
                 String string = arr2[i];
                int mns =  DAO.abstractDAO.query("select * from NGHESI where ten = ?",new NgheSiMapper(),string).get(0).getMaNS();
@@ -266,8 +270,9 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         jButton5 = new javax.swing.JButton();
         jButton6 = new javax.swing.JButton();
         jButton7 = new javax.swing.JButton();
-        jTextField1 = new javax.swing.JTextField();
+        txttheloai = new javax.swing.JTextField();
         jTextField2 = new javax.swing.JTextField();
+        jButton8 = new javax.swing.JButton();
         jLabel1 = new javax.swing.JLabel();
 
         setClosable(true);
@@ -325,7 +330,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 767, Short.MAX_VALUE)
+            .addComponent(jScrollPane1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 755, Short.MAX_VALUE)
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -394,6 +399,14 @@ public class qlbaihat extends javax.swing.JInternalFrame {
             }
         });
 
+        jButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/data/broom_30px.png"))); // NOI18N
+        jButton8.setText("Mới");
+        jButton8.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton8ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
@@ -402,40 +415,47 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                 .addContainerGap()
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(39, 39, 39)
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel5)
+                                    .addComponent(txtthoiluong, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addGroup(jPanel2Layout.createSequentialGroup()
+                                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(txttheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                        .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                        .addContainerGap(58, Short.MAX_VALUE))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 350, Short.MAX_VALUE)
                             .addComponent(jLabel7)
                             .addComponent(txtmaalbum))
-                        .addGap(39, 39, 39)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(jButton3)
-                                .addGap(31, 31, 31)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addComponent(jButton4)
-                                .addGap(30, 30, 30)
-                                .addComponent(jButton5))))
-                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addComponent(jTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                            .addComponent(jButton7, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(jPanel2Layout.createSequentialGroup()
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, 350, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addComponent(jLabel2)
-                                .addComponent(jLabel4))
-                            .addGap(39, 39, 39)
-                            .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel5)
-                                .addComponent(txtthoiluong, javax.swing.GroupLayout.PREFERRED_SIZE, 299, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGroup(jPanel2Layout.createSequentialGroup()
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 245, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(jButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 45, javax.swing.GroupLayout.PREFERRED_SIZE))))))
-                .addContainerGap(44, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jButton5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jButton8)
+                                .addGap(19, 19, 19))
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGap(39, 39, 39)
+                                .addComponent(jLabel8)
+                                .addGap(0, 0, Short.MAX_VALUE))))))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -445,21 +465,23 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                     .addComponent(jLabel2)
                     .addComponent(jLabel5))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(txttenbh, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(txttenbh, javax.swing.GroupLayout.DEFAULT_SIZE, 25, Short.MAX_VALUE)
-                            .addComponent(txtthoiluong))
-                        .addGap(18, 18, 18)
+                        .addGap(2, 2, 2)
+                        .addComponent(txtthoiluong)))
+                .addGap(18, 18, 18)
+                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4)
                             .addComponent(jLabel6))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(txtmaalbum, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButton6))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
+                            .addComponent(txttheloai, javax.swing.GroupLayout.PREFERRED_SIZE, 39, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addComponent(jButton6, javax.swing.GroupLayout.Alignment.TRAILING))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 20, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel7)
@@ -468,18 +490,15 @@ public class qlbaihat extends javax.swing.JInternalFrame {
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addComponent(jLabel8)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addGroup(jPanel2Layout.createSequentialGroup()
-                                .addComponent(jTextField2)
-                                .addGap(72, 72, 72))
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                                .addComponent(jButton7)
-                                .addGap(33, 33, 33)
-                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jButton5)
-                                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                        .addComponent(jButton3)
-                                        .addComponent(jButton4)))))))
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextField2)
+                            .addComponent(jButton7, javax.swing.GroupLayout.Alignment.TRAILING))
+                        .addGap(33, 33, 33)
+                        .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButton3)
+                            .addComponent(jButton4)
+                            .addComponent(jButton5)
+                            .addComponent(jButton8))))
                 .addGap(35, 35, 35))
         );
 
@@ -495,8 +514,10 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(tabs, javax.swing.GroupLayout.Alignment.TRAILING)
+            .addComponent(jLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 770, Short.MAX_VALUE)
+            .addGroup(layout.createSequentialGroup()
+                .addComponent(tabs, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -531,13 +552,12 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       
-            
+      
         deleteBH();
     }//GEN-LAST:event_jButton5ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-        if (untility.ValidateUnility.CheckNgheSi(jTextField1.getText())) {
+        if (untility.ValidateUnility.CheckNgheSi(txttheloai.getText())) {
             JOptionPane.showMessageDialog(null,"Bạn Có thể dùng tác giả này");
         }else{
             JOptionPane.showMessageDialog(null,"Có cc");
@@ -557,6 +577,11 @@ public class qlbaihat extends javax.swing.JInternalFrame {
         FillToTable();
     }//GEN-LAST:event_formInternalFrameOpened
 
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        // TODO add your handling code here:
+        clean();
+    }//GEN-LAST:event_jButton8ActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton3;
@@ -564,6 +589,7 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton5;
     private javax.swing.JButton jButton6;
     private javax.swing.JButton jButton7;
+    private javax.swing.JButton jButton8;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;
@@ -575,13 +601,13 @@ public class qlbaihat extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField jTextField2;
     private javax.swing.JTabbedPane tabs;
     private javax.swing.JTable tbbh;
     private javax.swing.JTextArea txtlyric;
     private javax.swing.JTextField txtmaalbum;
     private javax.swing.JTextField txttenbh;
+    private javax.swing.JTextField txttheloai;
     private javax.swing.JTextField txtthoiluong;
     // End of variables declaration//GEN-END:variables
 }

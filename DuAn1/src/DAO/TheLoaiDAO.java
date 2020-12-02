@@ -22,8 +22,11 @@ public class TheLoaiDAO implements  GennericDAO<TheLoai>{
 
     @Override
     public TheLoai findOne(String sql, Object... object) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
+         try {
+               return DAO.abstractDAO.query(sql,new TheLoaiMapper(),object).get(0);   
+           } catch (Exception e) {
+               return null;
+           }}
 
     @Override
     public void update(String sql, Object... object) {
