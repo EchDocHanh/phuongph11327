@@ -5,7 +5,10 @@
  */
 package view;
 
+import Cantroller.getBaiHat;
 import java.awt.BorderLayout;
+import java.util.List;
+import model.BaiHat;
 
 /**
  *
@@ -21,10 +24,12 @@ public class mainUser extends javax.swing.JFrame {
 
         jPanel6.removeAll();
        
-
+         List<BaiHat> list = new getBaiHat().getBH();
+         
             ItemPnl [] lay = new ItemPnl [100];
-        for (int i = 0; i < 100; i++) {
-            lay[i] = new ItemPnl();
+        for (int i = 0; i < list.size() ; i++) {
+          
+           lay[i] = new ItemPnl(list.get(i));
             jPanel6.add(lay[i]);
         }
         jPanel6.validate();

@@ -5,11 +5,19 @@
  */
 package controller;
 
+import DAO.abstractDAO;
+import DAO.baihatDAO;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.json.JsonMapper;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.List;
+import mapper.BaiHatMapper;
+import model.BaiHat;
 
 /**
  *
@@ -32,14 +40,21 @@ public class ServerMP3 {
             ObjectInputStream ois = new ObjectInputStream(socket.getInputStream());
             //convert ObjectInputStream object to String
             String message = (String) ois.readObject();
-            System.out.println("Message Received: " + message);
+            System.out.println(message);
+              ObjectMapper mapper = new JsonMapper();
+ 
+            JsonNode jsonNode = mapper.readTree(message);
+             String type = jsonNode.get("type").asText();
+             System.out.println(type);
+             if (type.equalsIgnoreCase("getBaiHat")) {
+                 new SendBaiHat().sendbh(socket);    
+            }
+            
             //create ObjectOutputStream object
-            ObjectOutputStream oos = new ObjectOutputStream(socket.getOutputStream());
-            //write object to Socket
-            oos.writeObject("Hi Client "+message);
+          
             //close resources
             ois.close();
-            oos.close();
+          
             socket.close();
             //terminate the server if client sends exit request
             if(message.equalsIgnoreCase("exit")) break;

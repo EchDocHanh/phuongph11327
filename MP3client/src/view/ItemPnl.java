@@ -5,6 +5,8 @@
  */
 package view;
 
+import model.BaiHat;
+
 /**
  *
  * @author Administrator
@@ -14,8 +16,11 @@ public class ItemPnl extends javax.swing.JPanel {
     /**
      * Creates new form ItemPnl
      */
-    public ItemPnl() {
+    public ItemPnl(BaiHat bh) {
         initComponents();
+        jLabel37.setText(bh.getTenBH());
+        jLabel36.setText(String.valueOf(bh.getThoiLuong()));
+        jLabel34.setText(bh.getCaSi());
     }
 
     /**
@@ -60,14 +65,14 @@ public class ItemPnl extends javax.swing.JPanel {
             jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel13Layout.createSequentialGroup()
                 .addGap(93, 93, 93)
-                .addComponent(jLabel37, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(88, 88, 88)
+                .addComponent(jLabel37, javax.swing.GroupLayout.DEFAULT_SIZE, 242, Short.MAX_VALUE)
+                .addGap(18, 18, 18)
                 .addComponent(jLabel34, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(52, 52, 52)
+                .addGap(35, 35, 35)
                 .addComponent(jLabel36, javax.swing.GroupLayout.PREFERRED_SIZE, 114, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel35)
-                .addContainerGap(51, Short.MAX_VALUE))
+                .addContainerGap())
             .addGroup(jPanel13Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel13Layout.createSequentialGroup()
                     .addGap(20, 20, 20)
