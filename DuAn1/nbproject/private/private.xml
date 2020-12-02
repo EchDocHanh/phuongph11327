@@ -3,6 +3,7 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/qlbaihat.java</file>
             <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/DAO/AlbumDAO.java</file>
             <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/mainAdmin.java</file>
@@ -11,6 +12,11 @@
             <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/qlAlbum.java</file>
             <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/DAO/NgheSiDAO.java</file>
             <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/qlTheLoai.java</file>
+=======
+            <file>file:/C:/Users/Administrator/Desktop/GitDuAn1/phuongph11327/DuAn1/src/model/BaiHat.java</file>
+            <file>file:/C:/Users/Administrator/Desktop/GitDuAn1/phuongph11327/DuAn1/src/controller/SendBaiHat.java</file>
+            <file>file:/C:/Users/Administrator/Desktop/GitDuAn1/phuongph11327/DuAn1/src/controller/ServerMP3.java</file>
+>>>>>>> f55632a29e99e3aefd7f98eea6c7f310d22d56fb
         </group>
     </open-files>
 </project-private>
