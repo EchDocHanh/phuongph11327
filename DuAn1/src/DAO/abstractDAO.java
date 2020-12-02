@@ -24,7 +24,7 @@ public class abstractDAO {
      public static String driver="com.microsoft.sqlserver.jdbc.SQLServerDriver"; 
     public static String dburl="jdbc:sqlserver://localhost:1433;databaseName=mp3Poly";
     public static String username="sa";
-    public static String password="songlong";
+    public static String password="123";
     
     //nạp driver
     static{

@@ -3,7 +3,15 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
+<<<<<<< HEAD
             <file>file:/C:/Users/Administrator/Desktop/GitDuAn1/phuongph11327/DuAn1/src/view/LoginFrame.java</file>
+=======
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/qlbaihat.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/mainAdmin.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/DAO/abstractDAO.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/view/qlTaiKhoan.java</file>
+            <file>file:/C:/Users/Admin/Desktop/phuongph11327/DuAn1/src/model/TaiKhoan.java</file>
+>>>>>>> 620b633c0fcd31758ec8fa308e5c462f06a87bf4
         </group>
     </open-files>
 </project-private>
