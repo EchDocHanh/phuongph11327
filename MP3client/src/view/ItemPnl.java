@@ -5,6 +5,7 @@
  */
 package view;
 
+import java.awt.Color;
 import model.BaiHat;
 
 /**
@@ -16,11 +17,16 @@ public class ItemPnl extends javax.swing.JPanel {
     /**
      * Creates new form ItemPnl
      */
-    public ItemPnl(BaiHat bh) {
+    mainUser view ;
+    BaiHat bh ;
+    public ItemPnl(BaiHat bh , mainUser view) {
         initComponents();
         jLabel37.setText(bh.getTenBH());
         jLabel36.setText(String.valueOf(bh.getThoiLuong()));
         jLabel34.setText(bh.getCaSi());
+        this.view = view;
+        this.bh = bh;
+        
     }
 
     /**
@@ -40,6 +46,11 @@ public class ItemPnl extends javax.swing.JPanel {
         jLabel38 = new javax.swing.JLabel();
 
         setBackground(new java.awt.Color(102, 102, 102));
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                formMouseClicked(evt);
+            }
+        });
 
         jPanel13.setBackground(new java.awt.Color(51, 51, 51));
 
@@ -117,6 +128,14 @@ public class ItemPnl extends javax.swing.JPanel {
         );
     }// </editor-fold>//GEN-END:initComponents
 
+    private void formMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_formMouseClicked
+        // TODO add your handling code here:
+         if (evt.getClickCount() == 2) {
+            view.PhatNhac(bh);
+            jPanel13.setBackground(new Color(0,102,102));
+        }
+    }//GEN-LAST:event_formMouseClicked
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel34;
@@ -124,6 +143,6 @@ public class ItemPnl extends javax.swing.JPanel {
     private javax.swing.JLabel jLabel36;
     private javax.swing.JLabel jLabel37;
     private javax.swing.JLabel jLabel38;
-    private javax.swing.JPanel jPanel13;
+    public javax.swing.JPanel jPanel13;
     // End of variables declaration//GEN-END:variables
 }

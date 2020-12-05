@@ -7,6 +7,8 @@ package view;
 
 import Cantroller.getBaiHat;
 import java.awt.BorderLayout;
+import java.awt.Color;
+import java.util.ArrayList;
 import java.util.List;
 import model.BaiHat;
 
@@ -19,6 +21,7 @@ public class mainUser extends javax.swing.JFrame {
     /**
      * Creates new form mainUser
      */
+    List<ItemPnl> item = new ArrayList<>();
     public mainUser() {
         initComponents();
 
@@ -29,11 +32,24 @@ public class mainUser extends javax.swing.JFrame {
             ItemPnl [] lay = new ItemPnl [100];
         for (int i = 0; i < list.size() ; i++) {
           
-           lay[i] = new ItemPnl(list.get(i));
+           lay[i] = new ItemPnl(list.get(i),this);
+           item.add(lay[i]);
             jPanel6.add(lay[i]);
         }
         jPanel6.validate();
         jPanel6.repaint();
+    }
+    
+    public void PhatNhac(BaiHat bh){
+        jLabel19.setText(bh.getTenBH());
+        jLabel20.setText(bh.getCaSi());
+        jLabel16.setText(bh.getTenBH());
+        jLabel17.setText(bh.getCaSi());
+        jLabel59.setText(String.valueOf(bh.getThoiLuong()));
+        for (ItemPnl itemPnl : item) {
+            itemPnl.jPanel13.setBackground(new Color(51,51,51));
+        }
+        
     }
 
     /**
@@ -94,7 +110,7 @@ public class mainUser extends javax.swing.JFrame {
 
         jPanel4.setBackground(new java.awt.Color(102, 102, 102));
 
-        jPanel1.setBackground(new java.awt.Color(51, 51, 51));
+        jPanel1.setBackground(new java.awt.Color(0, 102, 102));
         jPanel1.setPreferredSize(new java.awt.Dimension(220, 80));
 
         jLabel1.setBackground(new java.awt.Color(0, 153, 102));
@@ -446,9 +462,7 @@ public class mainUser extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addGap(0, 0, 0))))
+                    .addComponent(jScrollPane1)))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -481,7 +495,8 @@ public class mainUser extends javax.swing.JFrame {
             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
-        pack();
+        setSize(new java.awt.Dimension(1106, 762));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     /**
@@ -539,12 +554,7 @@ public class mainUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel39;
     private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel40;
-    private javax.swing.JLabel jLabel41;
-    private javax.swing.JLabel jLabel42;
-    private javax.swing.JLabel jLabel43;
     private javax.swing.JLabel jLabel49;
     private javax.swing.JLabel jLabel50;
     private javax.swing.JLabel jLabel51;
@@ -552,19 +562,12 @@ public class mainUser extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel58;
     private javax.swing.JLabel jLabel59;
     private javax.swing.JLabel jLabel60;
-    private javax.swing.JLabel jLabel61;
-    private javax.swing.JLabel jLabel62;
-    private javax.swing.JLabel jLabel63;
-    private javax.swing.JLabel jLabel64;
-    private javax.swing.JLabel jLabel65;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
     private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel14;
     private javax.swing.JPanel jPanel16;
     private javax.swing.JPanel jPanel18;
-    private javax.swing.JPanel jPanel19;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
