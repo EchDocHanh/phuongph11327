@@ -221,9 +221,15 @@
                               <Component id="txttennd" min="-2" pref="25" max="-2" attributes="0"/>
                               <EmptySpace type="separate" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
+<<<<<<< HEAD
+                                  <Group type="103" alignment="0" groupAlignment="3" attributes="0">
+                                      <Component id="rdnam" alignment="3" min="-2" max="-2" attributes="0"/>
+                                      <Component id="rdnu" alignment="3" max="32767" attributes="0"/>
+=======
                                   <Group type="102" attributes="0">
                                       <EmptySpace min="-2" pref="23" max="-2" attributes="0"/>
                                       <Component id="txtgioitinh" min="-2" pref="24" max="-2" attributes="0"/>
+>>>>>>> 4150a79c52317b541a4cb44e9b65e7beb7dc1fbb
                                   </Group>
                                   <Component id="jLabel7" min="-2" max="-2" attributes="0"/>
                               </Group>
@@ -360,7 +366,11 @@
           <Color blue="99" green="cc" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
+<<<<<<< HEAD
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; T&#xe0;i Kho&#x1ea3;n"/>
+=======
         <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; b&#xe0;i h&#xe1;t"/>
+>>>>>>> 4150a79c52317b541a4cb44e9b65e7beb7dc1fbb
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>

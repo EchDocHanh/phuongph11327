@@ -407,7 +407,7 @@
           <Color blue="99" green="cc" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; b&#xe0;i h&#xe1;t"/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n L&#xfd; B&#xe0;i H&#xe1;t"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
