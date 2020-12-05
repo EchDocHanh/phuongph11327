@@ -28,9 +28,13 @@ public class BaiHat {
     public BaiHat() {
          }
     public void setTLTG(){
-       CaSi = abstractDAO.query("select NGHESI.* from NGHESI join BAIHAT_NGHESI on NGHESI.MaNS = BAIHAT_NGHESI.MaNS where BAIHAT_NGHESI.MaBH = ?",new NgheSiMapper(),MaBH).get(0).getTenNS();
+        try {
+             CaSi = abstractDAO.query("select NGHESI.* from NGHESI join BAIHAT_NGHESI on NGHESI.MaNS = BAIHAT_NGHESI.MaNS where BAIHAT_NGHESI.MaBH = ?",new NgheSiMapper(),MaBH).get(0).getTenNS();
         TheLoai = abstractDAO.query("select THELOAI.* from THELOAI join BAIHAT_THElOAI on THELOAI.MaTL = BAIHAT_THElOAI.MaTL where BAIHAT_THElOAI.MaBH = ?",new TheLoaiMapper(),MaBH).get(0).getTenTL();
     
+        } catch (Exception e) {
+        }
+      
     }
     
     
