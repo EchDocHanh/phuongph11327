@@ -33,7 +33,8 @@ public class qlTheLoai extends javax.swing.JInternalFrame {
      */
     public qlTheLoai() {
         initComponents();
-        tabs.setSelectedIndex(1);   
+        tabs.setSelectedIndex(1);  
+        
     }
     void FillToTable(){
         DefaultTableModel model = (DefaultTableModel) tbtl.getModel();
@@ -217,6 +218,10 @@ public class qlTheLoai extends javax.swing.JInternalFrame {
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Ngày Tạo");
 
+        txtnguoitao.setEditable(false);
+
+        txtngaytao.setEditable(false);
+
         jLabel5.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel5.setText("Người Tạo");
 
@@ -325,7 +330,7 @@ public class qlTheLoai extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 20)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(0, 204, 153));
         jLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
-        jLabel1.setText("Quản lý ALBUM");
+        jLabel1.setText("Quản lý Thể Loại");
         jLabel1.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());

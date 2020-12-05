@@ -245,8 +245,14 @@
             <Component class="javax.swing.JTextField" name="txttentl">
             </Component>
             <Component class="javax.swing.JTextField" name="txtnguoitao">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JTextField" name="txtngaytao">
+              <Properties>
+                <Property name="editable" type="boolean" value="false"/>
+              </Properties>
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -313,7 +319,7 @@
           <Color blue="99" green="cc" red="0" type="rgb"/>
         </Property>
         <Property name="horizontalAlignment" type="int" value="0"/>
-        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; ALBUM"/>
+        <Property name="text" type="java.lang.String" value="Qu&#x1ea3;n l&#xfd; Th&#x1ec3; Lo&#x1ea1;i"/>
         <Property name="horizontalTextPosition" type="int" value="0"/>
       </Properties>
     </Component>
