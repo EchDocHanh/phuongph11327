@@ -30,6 +30,15 @@ public class mainAdmin extends javax.swing.JFrame {
     void openQLTK(){
         openX(new qlTaiKhoan());
     }
+    void openQLAB(){
+        openX(new qlAlbum());
+    }
+    void openQLTL(){
+        openX(new qlTheLoai());
+    }
+    void openQLNS(){
+        openX(new qlNgheSi());
+    }
     void openX(JInternalFrame x){
         for(JInternalFrame Allfrm : jDesktopPane1.getAllFrames()){
             Allfrm.dispose();
@@ -111,6 +120,11 @@ public class mainAdmin extends javax.swing.JFrame {
         jButton4.setOpaque(true);
         jButton4.setRolloverIcon(new javax.swing.ImageIcon(getClass().getResource("/data/icons8_audible_50px_1.png"))); // NOI18N
         jButton4.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
+        jButton4.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton4ActionPerformed(evt);
+            }
+        });
 
         jButton6.setBackground(new java.awt.Color(102, 255, 204));
         jButton6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -317,10 +331,12 @@ public class mainAdmin extends javax.swing.JFrame {
 
     private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         // TODO add your handling code here:
+        openQLAB();
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         // TODO add your handling code here:
+        openQLNS();
     }//GEN-LAST:event_jButton7ActionPerformed
 
     private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
@@ -332,6 +348,11 @@ public class mainAdmin extends javax.swing.JFrame {
         // TODO add your handling code here:
       openQLTK();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        // TODO add your handling code here:
+        openQLTL();
+    }//GEN-LAST:event_jButton4ActionPerformed
         
     /**
      * @param args the command line arguments

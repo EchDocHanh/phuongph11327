@@ -19,41 +19,46 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mapper.NgheSiMapper;
 import model.NgheSi;
+
 /**
  *
  * @author Admin
  */
 
 public class qlNgheSi extends javax.swing.JInternalFrame {
+
     NgheSiDAO nsdao = new NgheSiDAO();
     int index = 0;
     String TenNS = "";
+
     /**
      * Creates new form qlbaihat
      */
     public qlNgheSi() {
         initComponents();
-        tabs.setSelectedIndex(1);   
+        tabs.setSelectedIndex(0);
     }
-    void FillToTable(){
-       DefaultTableModel model = (DefaultTableModel) tbns.getModel();
+
+    void FillToTable() {
+        DefaultTableModel model = (DefaultTableModel) tbns.getModel();
         model.setRowCount(0);
         try {
-             List<NgheSi> list = nsdao.findAll("select * from NGHESI");
-             for(NgheSi x : list){
-                 Object[] row = {
-                  x.getTenNS(),
-                  x.getNgayTao(),
-                  x.getNguoiTao(),
-                  x.getMota()
-                 };
-                 model.addRow(row);
-             } 
+            List<NgheSi> list = nsdao.findAll("select * from NGHESI");
+            for (NgheSi x : list) {
+                Object[] row = {
+                    x.getTenNS(),
+                    x.getNgayTao(),
+                    x.getNguoiTao(),
+                    x.getMota()
+                };
+                model.addRow(row);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    void clean(){
+
+    void clean() {
         txttenns.setBackground(Color.white);
         txtngaytao.setBackground(Color.white);
         txtnguoitao.setBackground(Color.white);
@@ -63,11 +68,12 @@ public class qlNgheSi extends javax.swing.JInternalFrame {
         txtnguoitao.setText("");
         txtmota.setText("");
     }
-    void editTable(){
+
+    void editTable() {
         clean();
         try {
             TenNS = (String) tbns.getValueAt(this.index, 0);
-            NgheSi model = nsdao.findOne("select * from NGHESI where ten = ?",TenNS);
+            NgheSi model = nsdao.findOne("select * from NGHESI where ten = ?", TenNS);
             txttenns.setText(model.getTenNS());
             txtngaytao.setText(String.valueOf(model.getNgayTao()));
             txtnguoitao.setText(model.getNguoiTao());
@@ -76,57 +82,64 @@ public class qlNgheSi extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-    
-    void addNS(){
+
+    void addNS() {
         NgheSi model = getModel();
         try {
-            abstractDAO.update("insert into NGHESI(ten,NgayTao,NguoiTao,Mota)VALUES(?,?,?,?)"
-            ,txttenns.getText(),txtngaytao.getText(),txtnguoitao.getText(),txtmota.getText());
+            abstractDAO.update("insert into NGHESI(ten,NgayTao,NguoiTao,Mota)VALUES(?,?,?,?)",
+                     txttenns.getText(), txtngaytao.getText(), txtnguoitao.getText(), txtmota.getText());
             this.FillToTable();
             this.clean();
-            JOptionPane.showMessageDialog(this,"Thêm thành công");
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
         } catch (Exception e) {
             System.out.println("Exception in addNS");
         }
     }
-    void updateNS(){
+
+    void updateNS() {
         try {
-            abstractDAO.update("update NGHESI set ten = ?,NgayTao = ? ,NguoiTao = ?,Mota = ? where ten = ?"
-            ,txttenns.getText(),txtngaytao.getText(),txtnguoitao.getText(),txtmota.getText(),TenNS);
+            abstractDAO.update("update NGHESI set ten = ?,NgayTao = ? ,NguoiTao = ?,Mota = ? where ten = ?",
+                     txttenns.getText(), txtngaytao.getText(), txtnguoitao.getText(), txtmota.getText(), TenNS);
             this.FillToTable();
-            JOptionPane.showMessageDialog(this,"sửa thành công");
+            JOptionPane.showMessageDialog(this, "sửa thành công");
         } catch (Exception e) {
             e.printStackTrace();
-        }  
+        }
     }
-    void deleteNS(){
-            try {
-                 int mans =  DAO.abstractDAO.query("select * from NGHESI where ten = ?",new NgheSiMapper(),txttenns.getText()).get(0).getMaNS();
-            abstractDAO.update("delete NGHESI where MaNS = ?",mans);
-                this.FillToTable();
-                this.clean();
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        
+
+    void deleteNS() {
+        try {
+            int mans = DAO.abstractDAO.query("select * from NGHESI where ten = ?", new NgheSiMapper(), txttenns.getText()).get(0).getMaNS();
+            abstractDAO.update("delete USER_NGHESI where MaNS = ?", mans);
+            abstractDAO.update("delete BAIHAT_NGHESI where MaNS = ?", mans);
+            abstractDAO.update("delete NGHESI where MaNS = ?", mans);
+            this.FillToTable();
+            this.clean();
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            tabs.setSelectedIndex(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
-    void setModel(NgheSi model){
+
+    void setModel(NgheSi model) {
         txttenns.setText(model.getTenNS());
         txtngaytao.setText(String.valueOf(model.getNgayTao()));
         txtmota.setText(model.getMota());
         txtnguoitao.setText(model.getNguoiTao());
-        
+
     }
-    NgheSi getModel(){
-        NgheSi ns =  new NgheSi();
+
+    NgheSi getModel() {
+        NgheSi ns = new NgheSi();
         ns.setTenNS(txttenns.getText());
         ns.setNgayTao(Timestamp.valueOf(txtngaytao.getText()));
         ns.setMota(txtmota.getText());
         ns.setNguoiTao(txtnguoitao.getText());
         return ns;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -372,15 +385,14 @@ public class qlNgheSi extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_tbnsMouseClicked
-   
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         updateNS();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       
-            
+
         deleteNS();
     }//GEN-LAST:event_jButton5ActionPerformed
 

@@ -19,41 +19,46 @@ import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import mapper.TheLoaiMapper;
 import model.TheLoai;
+
 /**
  *
  * @author Admin
  */
 
 public class qlTheLoai extends javax.swing.JInternalFrame {
+
     TheLoaiDAO tldao = new TheLoaiDAO();
     int index = 0;
     String TenTheLoai = "";
+
     /**
      * Creates new form qlbaihat
      */
     public qlTheLoai() {
         initComponents();
-        tabs.setSelectedIndex(1);  
-        
+        tabs.setSelectedIndex(0);
+
     }
-    void FillToTable(){
+
+    void FillToTable() {
         DefaultTableModel model = (DefaultTableModel) tbtl.getModel();
         model.setRowCount(0);
         try {
-             List<TheLoai> list = tldao.findAll("select * from THELOAI");
-             for(TheLoai x : list){
-                 Object[] row = {
-                  x.getTenTL(),
-                  x.getNgayTao(),
-                  x.getNguoiTao()
-                 };
-                 model.addRow(row);
-             } 
+            List<TheLoai> list = tldao.findAll("select * from THELOAI");
+            for (TheLoai x : list) {
+                Object[] row = {
+                    x.getTenTL(),
+                    x.getNgayTao(),
+                    x.getNguoiTao()
+                };
+                model.addRow(row);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         }
     }
-    void clean(){
+
+    void clean() {
         txttentl.setBackground(Color.white);
         txtngaytao.setBackground(Color.white);
         txtnguoitao.setBackground(Color.white);
@@ -61,11 +66,12 @@ public class qlTheLoai extends javax.swing.JInternalFrame {
         txtngaytao.setText("");
         txtnguoitao.setText("");
     }
-    void editTable(){
-       clean();
+
+    void editTable() {
+        clean();
         try {
             TenTheLoai = (String) tbtl.getValueAt(this.index, 0);
-            TheLoai model = tldao.findOne("select * from THELOAI where tenTL = ?",TenTheLoai);
+            TheLoai model = tldao.findOne("select * from THELOAI where tenTL = ?", TenTheLoai);
             txttentl.setText(model.getTenTL());
             txtngaytao.setText(String.valueOf(model.getNgayTao()));
             txtnguoitao.setText(model.getNguoiTao());
@@ -73,55 +79,62 @@ public class qlTheLoai extends javax.swing.JInternalFrame {
             e.printStackTrace();
         }
     }
-    
-    void addTL(){
+
+    void addTL() {
         TheLoai model = getModel();
         try {
-            abstractDAO.update("insert into THELOAI(tenTL,NgayTao,NguoiTao)VALUES(?,?,?)"
-            ,txttentl.getText(),txtngaytao.getText(),txtnguoitao.getText());
+            abstractDAO.update("insert into THELOAI(tenTL,NgayTao,NguoiTao)VALUES(?,?,?)",
+                     txttentl.getText(), txtngaytao.getText(), txtnguoitao.getText());
             this.FillToTable();
             this.clean();
-            JOptionPane.showMessageDialog(this,"Thêm thành công");
+            JOptionPane.showMessageDialog(this, "Thêm thành công");
         } catch (Exception e) {
             System.out.println("Exception in addTL");
         }
     }
-    void updateTL(){
+
+    void updateTL() {
         try {
-            abstractDAO.update("update THELOAI set tenTL = ?,NgayTao = ? ,NguoiTao = ? where tenTL = ?"
-            ,txttentl.getText(),txtngaytao.getText(),txtnguoitao.getText(),TenTheLoai);
+            abstractDAO.update("update THELOAI set tenTL = ?,NgayTao = ? ,NguoiTao = ? where tenTL = ?",
+                     txttentl.getText(), txtngaytao.getText(), txtnguoitao.getText(), TenTheLoai);
             this.FillToTable();
-            JOptionPane.showMessageDialog(this,"sửa thành công");
+            JOptionPane.showMessageDialog(this, "sửa thành công");
         } catch (Exception e) {
             e.printStackTrace();
-        }  
+        }
     }
-    void deleteTL(){
-            try {
-                 int matl =  DAO.abstractDAO.query("select * from THELOAI where tenTL = ?",new TheLoaiMapper(),txttentl.getText()).get(0).getMaTL();
-            abstractDAO.update("delete THELOAI where MaTL = ?",matl);
-                this.FillToTable();
-                this.clean();
-                JOptionPane.showMessageDialog(this, "Xóa thành công!");
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        
+
+    void deleteTL() {
+        try {
+            int matl = DAO.abstractDAO.query("select * from THELOAI where tenTL = ?", new TheLoaiMapper(), txttentl.getText()).get(0).getMaTL();
+            abstractDAO.update("delete USER_THELOAI where MaTL = ?", matl);
+            abstractDAO.update("delete BAIHAT_THELOAI where MaTL = ?", matl);
+            abstractDAO.update("delete THELOAI where MaTL = ?", matl);
+            this.FillToTable();
+            this.clean();
+            JOptionPane.showMessageDialog(this, "Xóa thành công!");
+            tabs.setSelectedIndex(0);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
     }
-    void setModel(TheLoai model){
+
+    void setModel(TheLoai model) {
         txttentl.setText(model.getTenTL());
         txtngaytao.setText(String.valueOf(model.getNgayTao()));
         txtnguoitao.setText(model.getNguoiTao());
-        
+
     }
-    TheLoai getModel(){
+
+    TheLoai getModel() {
         TheLoai tl = new TheLoai();
         tl.setTenTL(txttentl.getText());
         tl.setNgayTao(Timestamp.valueOf(txtngaytao.getText()));
         tl.setNguoiTao(txtnguoitao.getText());
         return tl;
     }
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -367,15 +380,14 @@ public class qlTheLoai extends javax.swing.JInternalFrame {
             }
         }
     }//GEN-LAST:event_tbtlMouseClicked
-   
+
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         // TODO add your handling code here:
         updateTL();
     }//GEN-LAST:event_jButton4ActionPerformed
 
     private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-       
-            
+
         deleteTL();
     }//GEN-LAST:event_jButton5ActionPerformed
 
